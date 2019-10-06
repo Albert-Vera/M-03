@@ -1,4 +1,4 @@
-package UF_1.Juegos.view;
+package UF_1.Juegos.Dados;
 
 import UF_1.Juegos.Dados.MenuDados;
 

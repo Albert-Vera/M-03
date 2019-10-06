@@ -6,9 +6,9 @@ import static UF_1.Juegos.Dados.Daus.tirar;
 
 public class JocdeDaus {
 
-    int dado1;
-    int dado2;
-    int dado3;
+    public static int dado1;
+    public static int dado2;
+    public static int dado3;
     public static int contador;
     public static int partidasGanadas;
     public static int partidasPerdidas;
@@ -38,18 +38,10 @@ public class JocdeDaus {
 
                 + nl + "DADO 2:   " + dado2
                 + nl + "DADO 3:   " + dado3);
-        Daus.imprimir(texto);
-
-        if ( dado1 == dado2 && dado2 == dado3){
-
-            partidasGanadas++;
-            texto = " !!!!!!   ESTUPENDO GANASTE !!!!!!";
-        }else{
-
-            partidasPerdidas++;
-            texto = "  !!!!!!!!  ERES DECEPCIONANTE..... PERDISTE   !!!!!!!";
-        }
 
         Daus.imprimir(texto);
+
+        Daus.getValor();
+
     }
 }

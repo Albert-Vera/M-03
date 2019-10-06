@@ -17,7 +17,6 @@ public class MenuDados {
 
             String texto =("          ##############      JUEGO DE DADOS    ##################"
                     + nl + nl
-
                     + nl + "  (1)  Tirar dados"
                     + nl + "  (0)  Terminar partida"  + nl);
             String opcion = JOptionPane.showInputDialog(texto);
@@ -33,7 +32,8 @@ public class MenuDados {
                     break;
 
                 default:
-                    JOptionPane.showMessageDialog(null, "INTRODUCE SOLO UNA DE LAS DOS OPCIONES");
+                    texto="INTRODUCE SOLO UNA DE LAS DOS OPCIONES";
+                    Daus.imprimir(texto);
                     break;
             }
         }
@@ -46,7 +46,7 @@ public class MenuDados {
 
                 + nl + "Partidas Jugadas:  " + JocdeDaus.contador
                 + nl );
-        JOptionPane.showMessageDialog(null, texto);
+        Daus.imprimir(texto);
 
         JocdeDaus.contador = 0;
         JocdeDaus.partidasGanadas = 0;

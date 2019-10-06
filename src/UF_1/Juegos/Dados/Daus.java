@@ -2,10 +2,9 @@ package UF_1.Juegos.Dados;
 
 import javax.swing.*;
 
+import static UF_1.Juegos.Dados.JocdeDaus.*;
+
 public class Daus {
-
-    String texto;
-
 
     public static int tirar(){
 
@@ -25,12 +24,23 @@ public class Daus {
 
     }
 
-    public static int getValor(){
+    public static void getValor(){
 
         // aqui comparar valores
-        int dad=0;
 
-        return dad;
+        String texto;
+
+        if ((dado1 == dado2) && (dado2 == dado3)){
+
+            partidasGanadas++;
+            texto = " !!!!!!   ESTUPENDO GANASTE !!!!!!";
+            Daus.imprimir(texto);
+        }else{
+
+            partidasPerdidas++;
+            texto = "  !!!!!!!!  ERES DECEPCIONANTE..... PERDISTE   !!!!!!!";
+            Daus.imprimir(texto);
+        }
     }
 
 
