@@ -10,7 +10,6 @@ public class Menu_Juegos {
 
         Scanner entrada = new Scanner(System.in);
 
-
         while (true) {
 
             System.out.println();

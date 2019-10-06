@@ -9,11 +9,7 @@ public class MenuDados {
 
     public MenuDados() {
 
-        Scanner entrada = new Scanner(System.in);
-
-
         while (true) {
-
 
             String texto =("          ##############      JUEGO DE DADOS    ##################"
                     + nl + nl

@@ -20,9 +20,7 @@ public class JocdeDaus {
         dado1 = 0;
         dado2 = 0;
         dado3 = 0;
-
         jugar();
-
     }
 
     public void jugar(){
