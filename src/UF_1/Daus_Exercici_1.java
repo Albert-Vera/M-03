@@ -3,7 +3,7 @@ package UF_1;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Daus1 {
+public class Daus_Exercici_1 {
     public static void main(String[] args) {
 
         int [] daus = new int[13];
