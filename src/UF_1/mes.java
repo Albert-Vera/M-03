@@ -1,9 +1,10 @@
 package UF_1;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class JugadorsMap {
-
+public class mes {
     public static void main(String[] args) {
 
         Map<Integer, String> jugador = new TreeMap<Integer, String>();
