@@ -4,56 +4,51 @@ import java.util.*;
 
 public class JugadorsMap {
 
-    private int clau;
-
-
-//    public int getClau() {
-//        return clau;
-//    }
-//
-//    public void setClau(int clau) {
-//        this.clau = (int)(Math.random()*24 + 1);
-//    }
-//
-//    public JugadorsMap() {
-//        setClau();
-//    }
-
     public static void main(String[] args) {
 
-        Map<Integer, String> jugador = new TreeMap<Integer, String>();
-        //List<JugadorsMap> keys = new ArrayList<>();
-        //map.get(keysAsArray.get(r.nextInt(keysAsArray.size()))
-        jugador.put((int)(Math.random()*24), "Maria");
-        jugador.put((int)(Math.random()*24), "Ramón");
-        jugador.put(3, "Pedro");
-        jugador.put(5, "Pascal");
-        jugador.put(11, "Cesar");
-        jugador.put(14, "Xavier");
-        jugador.put(16, "Bernardo");
-        jugador.put(8, "Jordi");
-        jugador.put(18, "Anna");
-        jugador.put(6, "Isabel");
-        jugador.put(7, "Albert");
-        jugador.put(16, "Alba");
-        jugador.put(8, "Carine");
-        jugador.put(18, "Carme");
-        jugador.put(6, "Josep");
-        jugador.put(7, "Mariano");
+        Map<String, String> jugador = new TreeMap<String, String>();
 
-// Imprimimos el Map con un Iterador
-        Iterator<Integer> it = jugador.keySet().iterator();
-        
+        jugador.put(clauAleatoria(jugador), "Maria");
+        jugador.put(clauAleatoria(jugador), "Ramón");
+        jugador.put(clauAleatoria(jugador), "Pedro");
+        jugador.put(clauAleatoria(jugador), "Pascal");
+        jugador.put(clauAleatoria(jugador), "Cesar");
+        jugador.put(clauAleatoria(jugador), "Xavier");
+        jugador.put(clauAleatoria(jugador), "Bernardo");
+        jugador.put(clauAleatoria(jugador), "Jordi");
+        jugador.put(clauAleatoria(jugador), "Anna");
+        jugador.put(clauAleatoria(jugador), "Isabel");
+        jugador.put(clauAleatoria(jugador), "Albert");
+        jugador.put(clauAleatoria(jugador), "Alba");
+        jugador.put(clauAleatoria(jugador), "Carine");
+        jugador.put(clauAleatoria(jugador), "Carme");
+        jugador.put(clauAleatoria(jugador), "Josep");
+        jugador.put(clauAleatoria(jugador), "Mariano");
+
+                                            // Imprimimos el Map con un Iterador
+        Iterator<String > it = jugador.keySet().iterator();
+
         while(it.hasNext()){
-            Integer clau = it.next();
-            System.out.println("Clave: " + clau + " -> Valor: " + jugador.get(clau));
+            String clau = it.next();
+
+            if (Integer.parseInt(clau) %2 != 0){                // EN CAS DE SER SENAR
+                jugador.put(clau,jugador.get(clau)+ " " + clau);
+                System.out.println("Dorsal: " + clau + " -> Nom : " + jugador.get(clau));
+            }else
+                System.out.println("Dorsal: " + clau + " -> Nom : " + jugador.get(clau));
         }
     }
-    static Integer randomKey(){
 
-        ArrayList<Integer> dorsal = new ArrayList();
-        Random R = new Random();
+    static String clauAleatoria(Map<String, String> jugador) {
 
-       return dorsal.get(R.nextInt(24));
+        String a = "0";
+        int b= 0;
+
+        while( jugador.containsKey(a) || a.equals("0")){    // COMPROBAR SI EXISTEIX AQUESTA CLAU
+
+            b = (int)(Math.random()*24+1) ;
+            a = String.valueOf(b);
+        }
+        return a;
     }
 }
