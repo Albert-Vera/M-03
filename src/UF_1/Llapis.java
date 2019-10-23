@@ -31,6 +31,19 @@ public class Llapis implements Comparable<Llapis> {
         this.color = (int)(Math.random()*5);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Llapis)) return false;
+        Llapis llapis = (Llapis) o;
+        return color == llapis.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color);
+    }
+
     public static void main(String[] args) {
         List<Llapis> llapis = new ArrayList();
 
@@ -43,9 +56,19 @@ public class Llapis implements Comparable<Llapis> {
 
         ordenarGruixAmbComparable(llapis);
 
-        ArrayList<Integer> llapissos = extreureValordeColor(llapis);
+        treureRepetits(llapis);
 
-        treureRepetits(llapissos);
+    }
+
+    @Override
+    public int compareTo(Llapis llapis) {
+
+        if (llapis.getColor() < this.color) return 1;
+        else
+        if ( llapis.getColor() > this.color){
+            return -1;
+        }
+        else return 0;
 
     }
 
@@ -67,39 +90,15 @@ public class Llapis implements Comparable<Llapis> {
         }
     }
 
-    static void treureRepetits(ArrayList<Integer> llapissos){
-        Set<Integer> hashSet = new HashSet<>(llapissos);
-        llapissos.clear();
-        llapissos.addAll(hashSet);
+    static void treureRepetits(List<Llapis> llapissos){
+        Set<Llapis> hashSet = new HashSet<>(llapissos);
 
         System.out.println("\n    ##########   Llapisos sense repetits per Color   ######\n");
 
-        for (Integer noRepes : llapissos) {
-            System.out.println(noRepes);
+        for (Llapis noRepes : hashSet) {
+            System.out.println(noRepes.color);
         }
     }
 
-    static ArrayList<Integer> extreureValordeColor(List<Llapis> llapis){
 
-        ArrayList<Integer> cadena2 = new ArrayList<>();
-
-        for (Llapis ll : llapis){
-
-            cadena2.add(ll.gruix);
-            //System.out.println("  Gruix : " + ll.gruix);
-        }
-        return cadena2;
-    }
-
-    @Override
-    public int compareTo(Llapis llapis) {
-
-        if (llapis.getColor() < this.color) return 1;
-        else
-        if ( llapis.getColor() > this.color){
-            return -1;
-        }
-        else return 0;
-
-    }
 }
