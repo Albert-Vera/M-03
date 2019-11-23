@@ -61,6 +61,7 @@ public class Exer1_Expresions {
 
         char caracteAnterior, quienEsAnterior;
         int coincidencias, posChar, poscadena1;
+        boolean visitadaPor ;
 
 
         for (int i = 0; i < 4 ; i++) {  // FOR DE LINEAS DE ENTRADA (CASAS)
@@ -68,26 +69,30 @@ public class Exer1_Expresions {
             caracteAnterior =' ';
             quienEsAnterior =' ';
             enQueCasaEstamos(i);
+            visitadaPor = false;
 
             for (int x = 0; x < 3; x++) {       // FOR DE PERSONATGES
+                visitadaPor = busquedaPersonajes(cosas, x,i, coincidencias, posChar, poscadena1, caracteAnterior, quienEsAnterior, visitadaPor);
+            }
 
-                busquedaPersonajes(cosas, x,i, coincidencias, posChar, poscadena1, caracteAnterior, quienEsAnterior);
+            if (!visitadaPor){
+                System.out.println("\t\t\tNo ha rebut visites");
             }
         }
-        System.out.println("terminado");
+        System.out.println("Finito");
     }
 
-    void busquedaPersonajes(Exer1_Expresions cosas, int x, int i, int coincidencias, int posChar, int poscadena1, char caracteAnterior, char quienEsAnterior){
+    boolean busquedaPersonajes(Exer1_Expresions cosas, int x, int i, int coincidencias, int posChar, int poscadena1, char caracteAnterior, char quienEsAnterior, boolean visitadaPor){
 
         char caracter, quienEs;
         String cadenaA, cadenaB;
+
         for (int j = 0; j < cosas.inLine[i].length(); j++) {    // FOR DE CARACTERS PER LINEA
             caracter = cosas.inLine[i].charAt(j);               // LLEGIR PRIMER CHAR DE LINEA ENTRADA
             quienEs = busqueda[x].charAt(posChar);         // PRIMER CHAR DE PERSONATGE
+
             // if caracter es Repeteix i quienEs no es repeteix.. resetea quienEs
             if (caracter == caracteAnterior && quienEs != quienEsAnterior) {
-
-
                 posChar = 0;
                 coincidencias = 0;      // D'AQUESTA MANERA TORNAR A COMENÇAR
                 quienEs = busqueda[x].charAt(posChar);
@@ -110,12 +115,14 @@ public class Exer1_Expresions {
                 cadenaB = cosas.inLine[i].substring( j+1, cosas.inLine[i].length());
                 coincidencias = 0;
                 posChar = 0;
+                visitadaPor = true;
                 quePersonaje(busqueda[x]);
                 cosas.inLine[i] = cadenaA + cadenaB;
             }
             caracteAnterior = caracter;     // PER SOLUCIONAR PROBLEMA DE CARACTER REPETITS A LA ENTRADA
             quienEsAnterior = quienEs;
         }
+        return visitadaPor;
     }
 
     void enQueCasaEstamos(int x){
