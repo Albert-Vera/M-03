@@ -1,8 +1,9 @@
 package UF_5;
 
-import java.lang.reflect.Array;
+public class Exer1_NoExpresions {
 
-public class Exer1_Expresions {
+    private static String[] inLine = new String[4];
+    private String[] busqueda = new String[3];
 
     public String[] getInLine() {
         return inLine;
@@ -12,32 +13,8 @@ public class Exer1_Expresions {
         this.inLine = inLine;
     }
 
-    private String[] inLine = new String[4];
-    private String[] busqueda = new String[3];
-    private static String[] casa = new String[5];
-    private String pareNoel;
-    private String rens ;
-    private String follets ;
-    private String perro ;
+    public Exer1_NoExpresions(String[] casa) {
 
-
-
-    public String[] getCasa() {
-        return casa;
-    }
-
-    public void setCasa(String[] casa) {
-
-
-    }
-
-
-    public Exer1_Expresions(String[] casa) {
-        casa[0] = "[0]-=-=****=][=========";
-        casa[1] = "]-=-=****=][=*****=**=*![---!000";
-        casa[2] = "=*0-!";
-        casa[3] = "-=-0-oOo|=--=||++=++=++=>";
-        casa[4] = "pepe";
         busqueda[0] = "*<]:-DOo";
         busqueda[1] = ">:o)";
         busqueda[2] = "<]:-D";
@@ -50,14 +27,14 @@ public class Exer1_Expresions {
 
     public static void main(String[] args) {
 
-        Exer1_Expresions cosas = new Exer1_Expresions(casa);
-        cosas.compararCasas(cosas);
+        Exer1_NoExpresions exercici1 = new Exer1_NoExpresions(inLine);
+        exercici1.compararCasas(exercici1);
 
 
 
     }
 
-    public  void compararCasas(Exer1_Expresions cosas){
+    public  void compararCasas(Exer1_NoExpresions cosas){
 
         char caracteAnterior, quienEsAnterior;
         int coincidencias, posChar, poscadena1;
@@ -82,7 +59,7 @@ public class Exer1_Expresions {
         System.out.println("Finito");
     }
 
-    boolean busquedaPersonajes(Exer1_Expresions cosas, int x, int i, int coincidencias, int posChar, int poscadena1, char caracteAnterior, char quienEsAnterior, boolean visitadaPor){
+    boolean busquedaPersonajes(Exer1_NoExpresions cosas, int x, int i, int coincidencias, int posChar, int poscadena1, char caracteAnterior, char quienEsAnterior, boolean visitadaPor){
 
         char caracter, quienEs;
         String cadenaA, cadenaB;
