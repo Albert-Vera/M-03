@@ -1,145 +1,51 @@
 package UF_5;
 
+import java.io.*;
+
 public class Exer1_NoExpresions {
 
-    private static String[] inLine = new String[4];
     private String[] busqueda = new String[3];
 
-    public String[] getInLine() {
-        return inLine;
+    public String[] getBusqueda() {
+        return busqueda;
     }
 
-    public void setInLine(String[] inLine) {
-        this.inLine = inLine;
+    public void setBusqueda(String[] busqueda) {
+        this.busqueda = busqueda;
     }
 
-    public Exer1_NoExpresions(String[] casa) {
+    public Exer1_NoExpresions() {
 
         busqueda[0] = "*<]:-DOo";
         busqueda[1] = ">:o)";
         busqueda[2] = "<]:-D";
-        inLine[0] = "[0]-=-=*<]:-DOo##=========";
-        inLine[1] = "]-=-*<]:-DOo--*=][=>:o)*=**<]:-DOo0-!...";
-        inLine[2] = "-=-0-o<]:Oo|=--=||++=++=++=>";
-        inLine[3] = "==|<]:-D";
-
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Exer1_NoExpresions exercici1 = new Exer1_NoExpresions(inLine);
-        exercici1.compararCasas(exercici1);
+        Exer1_NoExpresions datos = new Exer1_NoExpresions();
 
+        File leerFile = new File("/home/albert/IdeaProjects/M-03/src/UF_5/santako.txt");
+        BufferedReader inputStream = new BufferedReader(new FileReader(leerFile));
+        String linea, cadenaA, cadenaB;
 
+        while((linea = inputStream.readLine()) != null && !linea.isEmpty()){
 
-    }
+            for (int i = 0; i < 3 ; i++) {      // FOR PER PERSONATGES
+                int contador = 0;
 
-    public  void compararCasas(Exer1_NoExpresions cosas){
-
-        char caracteAnterior, quienEsAnterior;
-        int coincidencias, posChar, poscadena1;
-        boolean visitadaPor ;
-
-
-        for (int i = 0; i < 4 ; i++) {  // FOR DE LINEAS DE ENTRADA (CASAS)
-            coincidencias = 0; posChar = 0; poscadena1 = 0;
-            caracteAnterior =' ';
-            quienEsAnterior =' ';
-            enQueCasaEstamos(i);
-            visitadaPor = false;
-
-            for (int x = 0; x < 3; x++) {       // FOR DE PERSONATGES
-                visitadaPor = busquedaPersonajes(cosas, x,i, coincidencias, posChar, poscadena1, caracteAnterior, quienEsAnterior, visitadaPor);
-            }
-
-            if (!visitadaPor){
-                System.out.println("\t\t\tNo ha rebut visites");
-            }
-        }
-        System.out.println("Finito");
-    }
-
-    boolean busquedaPersonajes(Exer1_NoExpresions cosas, int x, int i, int coincidencias, int posChar, int poscadena1, char caracteAnterior, char quienEsAnterior, boolean visitadaPor){
-
-        char caracter, quienEs;
-        String cadenaA, cadenaB;
-
-        for (int j = 0; j < cosas.inLine[i].length(); j++) {    // FOR DE CARACTERS PER LINEA
-            caracter = cosas.inLine[i].charAt(j);               // LLEGIR PRIMER CHAR DE LINEA ENTRADA
-            quienEs = busqueda[x].charAt(posChar);         // PRIMER CHAR DE PERSONATGE
-
-            // if caracter es Repeteix i quienEs no es repeteix.. resetea quienEs
-            if (caracter == caracteAnterior && quienEs != quienEsAnterior) {
-                posChar = 0;
-                coincidencias = 0;      // D'AQUESTA MANERA TORNAR A COMENÇAR
-                quienEs = busqueda[x].charAt(posChar);
-            }
-            // COMPARA CHAR PERSONATGE AMB LINEA ENTRADA
-            if (caracter == quienEs && coincidencias == posChar) {
-
-                if (posChar == 0){
-                    poscadena1 = j;
+                while (linea.indexOf(datos.busqueda[i]) > -1) { // ENTRA MENTRES TROBA PERSONATGES
+                    cadenaA = linea.substring( 0, linea.indexOf(datos.busqueda[i]));  //agafa char de tal pos a tal pos
+                    cadenaB = linea.substring( linea.indexOf(datos.busqueda[i]) + datos.busqueda[i].length(), linea.length());
+                    linea = cadenaA + cadenaB;  // LINEA SENSE EL PERSONATGE TROBAT
+                    contador++;
                 }
-                coincidencias++;
-                posChar++;
-            } else {     // SI NO COINCIDEIX CHAR PERSONATGE TORNA A PRIMER CHAR
-                coincidencias = 0;
-                posChar = 0;
+                if (i == 0 && contador > 0 ) System.out.print("Pare Nöel ("+ contador + ") ");
+                if (i == 1 && contador > 0 ) System.out.print("Rens (" + contador + ") ");
+                if (i == 2 && contador > 0 ) System.out.print("Follets (" + contador + ") ");
             }
-            // SI TE COINCIDENCIA TOTAL
-            if (coincidencias == cosas.busqueda[x].length()) {
-                cadenaA = cosas.inLine[i].substring( 0,poscadena1 );
-                cadenaB = cosas.inLine[i].substring( j+1, cosas.inLine[i].length());
-                coincidencias = 0;
-                posChar = 0;
-                visitadaPor = true;
-                quePersonaje(busqueda[x]);
-                cosas.inLine[i] = cadenaA + cadenaB;
-            }
-            caracteAnterior = caracter;     // PER SOLUCIONAR PROBLEMA DE CARACTER REPETITS A LA ENTRADA
-            quienEsAnterior = quienEs;
+            System.out.println();
         }
-        return visitadaPor;
-    }
-
-    void enQueCasaEstamos(int x){
-        String casa;
-
-        switch (x){
-            case 0:
-                casa = "primera";
-                break;
-            case 1:
-                casa = "segunda";
-                break;
-            case 2:
-                casa = "tercera";
-                break;
-            case 3:
-                casa = "cuarta";
-                break;
-            default: return ;
-        }
-        System.out.println("La " + casa + " casa es visitada por: ");
-    }
-
-    void quePersonaje(String s){
-        String personaje;
-
-        switch (s){
-
-            case "*<]:-DOo":
-                personaje = "Pare Nöel";
-                break;
-            case ">:o)":
-                personaje = "Rens del Pare Nöel";
-                break;
-            case "<]:-D":
-               personaje = "Follets ajudants";
-                break;
-            default: personaje = "\t\t\t Ninguna visita ";
-            return ;
-        }
-        System.out.println("\t\t\t" + personaje);
+        inputStream.close();
     }
 }

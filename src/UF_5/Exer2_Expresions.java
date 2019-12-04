@@ -1,127 +1,99 @@
 package UF_5;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Exer2_Expresions {
 
-    private static String[] inLine = new String[4];
     private String[] busqueda = new String[3];
 
-    public String[] getInLine() {
-        return inLine;
+    public String[] getBusqueda() {
+        return busqueda;
     }
 
-    public void setInLine(String[] inLine) {
-        this.inLine = inLine;
+    public void setBusqueda(String[] busqueda) {
+        this.busqueda = busqueda;
     }
 
-    public Exer2_Expresions(String[] casa) {
+    public Exer2_Expresions() {
 
         busqueda[0] = "\\*<]:-DOo";
         busqueda[1] = ">:o\\)";
         busqueda[2] = "<]:-D";
-        inLine[0] = "[0]-=-=*<]:-DOo##=========";
-        inLine[1] = "]-=-*<]:-DOo--*=][=>:o)*=**<]:-DOo0-!...";
-        inLine[2] = "-=-0-o<]:Oo|=--=||++=++=++=>";
-        inLine[3] = "==|<]:-D";
-
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Exer2_Expresions exercici2 = new Exer2_Expresions(inLine);
-        exercici2.buquedaPorLinea(exercici2);
-
-
-
+        Exer2_Expresions exercici2 = new Exer2_Expresions();
+        exercici2.llegir();
     }
 
-    public  void buquedaPorLinea(Exer2_Expresions cosas){
+    private void llegir() throws IOException {
 
+        File leerFile = new File("/home/albert/IdeaProjects/M-03/src/UF_5/santako.txt");
+        BufferedReader inputStream = new BufferedReader(new FileReader(leerFile));
+        String linea;
+
+        while((linea = inputStream.readLine()) != null && !linea.isEmpty()){
+            buquedaPorLinea(linea);
+        }
+        inputStream.close();
+    }
+
+    public  void buquedaPorLinea(String linea){
 
         boolean visitadoPor ;
+        visitadoPor = false;    // CONTROLAR SI NO HI HA VISITES
+        visitadoPor = busquedaPersonajes(linea, visitadoPor);
 
-        for (int i = 0; i < 4 ; i++) {  // FOR DE LINEAS DE ENTRADA (CASAS)
-
-            visitadoPor = false;
-            enQueCasaEstamos(i);
-            visitadoPor = busquedaPersonajes(cosas, i, visitadoPor);
-
-            if (!visitadoPor){
-                System.out.println("\t\t\tNo ha rebut visites");
-            }
-
+        if (!visitadoPor){      // SI NO HI HA VISITES IMPRIMIRA NO HI HA VISITES
+            System.out.println();
+        }else{
+            System.out.println();
         }
-        System.out.println("Finito");
     }
 
-    boolean busquedaPersonajes(Exer2_Expresions cosas, int i, boolean visitadoPor){
+    boolean busquedaPersonajes(String linea, boolean visitadoPor){    // BUSQUEDA PERSONATGES DINTRE LA LINEA DE ENTRADA
 
         for (int j = 0; j < 3; j++) {    // FOR DE CARACTERS PER LINEA
 
             Pattern patron = Pattern.compile(busqueda[j]);
-            Matcher encaja = patron.matcher(inLine[i]);
-
+            Matcher encaja = patron.matcher(linea);
             int contador = 0;
 
             while (encaja.find()) {
                 contador++;
             }
-            inLine[i] = encaja.replaceAll("");
-            //System.out.println(contador);
+            linea = encaja.replaceAll("");
 
             if (contador > 0){
                 quePersonaje(contador, j);
                 visitadoPor = true;
             }
-            // System.out.println(inLine[i]);
-
         }
         return visitadoPor;
     }
-    void enQueCasaEstamos(int x){
-        String casa;
 
-        switch (x){
-            case 0:
-                casa = "primera";
-                break;
-            case 1:
-                casa = "segunda";
-                break;
-            case 2:
-                casa = "tercera";
-                break;
-            case 3:
-                casa = "cuarta";
-                break;
-            default: return ;
-        }
-        System.out.println("\nLa " + casa + " casa es visitada por: ");
-    }
-
-    void quePersonaje(int contador, int s){
+    void quePersonaje(int contador, int s){     // DONAR VALOR STRING A PERSONATGE
         String personaje, vez;
 
         switch (s){
-
             case 0:
-                personaje = "Pare Nöel";
+                personaje = "Pare Nöel ";
                 break;
             case 1:
-                personaje = "Rens del Pare Nöel";
+                personaje = "Ren ";
                 break;
             case 2:
-                personaje = "Follets ajudants";
+                personaje = "Follet ";
                 break;
             default:
                 return ;
         }
-
-        if (contador > 1){
-            vez = " veces";
-        } else vez = " vez";
-        System.out.println("\t\t\t" + personaje + " entro en la casa " + contador + vez);
+        System.out.print(personaje + "(" + contador + ")  ");
     }
 }
