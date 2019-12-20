@@ -28,7 +28,7 @@ public class MenuGestorClients {
 
             System.out.print("Tria una opció: ");
 
-            int opcions = OperacionsBanc.verifySoloNumeros(sc);
+            int opcions = OperacionsBanc.verifySoloNumerosInteger(sc);
             switch (opcions) {
                 case 1:
                     new MenuInserirClient().inserirClient();

@@ -29,7 +29,7 @@ public class OperacionsBanc {
             return true;
         }else return false;
 
-        // AQUI HI HA EL MÉTODE DE VALIDAR EL DNI CORRECTE, PERO ESTA DESACTIVAT PER PROVES
+        // TODO AQUI HI HA EL MÉTODE DE VALIDAR EL DNI CORRECTE, PERO ESTA DESACTIVAT PER PROVES
 
 
 //        System.out.println("NIF "+nif);
@@ -61,9 +61,7 @@ public class OperacionsBanc {
 
     }
 
-    public static void transferencia(CompteEstalvi font, CompteEstalvi desti, double suma) {
-        //TODO implementar transferència
-    }
+
 
     public static boolean verifyNumeroCompte(String numeroCompte) throws IOException {
         boolean compteTrobat = false;
@@ -87,6 +85,7 @@ public class OperacionsBanc {
 
     /**
      *  Verifica que no s'ingresin quantitats negativas
+     *
      * @param sc        Variable Scanner
      * @param money     quantitat diners
      * @return
@@ -98,7 +97,7 @@ public class OperacionsBanc {
         while ( !repetir) {
             try {
                 System.out.print("introdueix la quantitat que vols " + texte + " : ");
-                money = sc.nextDouble();
+                money = OperacionsBanc.verifySoloNumerosDouble(sc);
 
                 if (money < 0 ){
                     throw new Ingres_Erroni(INGRES_ERRONI);
@@ -112,7 +111,13 @@ public class OperacionsBanc {
         return money;
     }
 
-    public static int verifySoloNumeros (Scanner sc){
+    /**
+     *      Verifica que en les opcions de menu només entrin números
+     *
+     * @param sc
+     * @return
+     */
+    public static int verifySoloNumerosInteger(Scanner sc){
 
         boolean repetir= false;
         String texto = "";
@@ -130,6 +135,29 @@ public class OperacionsBanc {
         return numero;
     }
 
+    /**
+     *          Verifica que al entrar quantitats de diners, no entrin strings
+     *
+     * @param sc
+     * @return
+     */
+    public static Double verifySoloNumerosDouble(Scanner sc){
+
+        boolean repetir= false;
+        String texto = "";
+        Double numero = 0.0;
+
+        while (!repetir) {
+            try {
+                texto = sc.nextLine();
+                numero = Double.parseDouble(texto);
+                repetir = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Ese valor no es válido");
+            }
+        }
+        return numero;
+    }
     public static boolean verifySaldoSuficient (Double diners, String numeroCompte) throws IOException, Transfer_Error {
 
         BufferedReader inputStream = new BufferedReader(new FileReader("fitxerComptes.dat"));
@@ -149,6 +177,14 @@ public class OperacionsBanc {
         return false;
     }
 
+    /**
+     *
+     *      Verifica si hi ha només un client en el compte
+     *
+     * @param dni
+     * @return
+     * @throws IOException
+     */
     public static boolean verifyZeroUser (String dni) throws IOException {
 
         BufferedReader inputStream = new BufferedReader(new FileReader("fitxerComptes.dat"));

@@ -21,7 +21,7 @@ public class MenuInserirClient {
             System.out.println("\n\n\t\t\t 4: Tornar enrere \n");
             System.out.println("\n-------------------------------------");
             System.out.print("Tria una opció: ");
-            int opcions = OperacionsBanc.verifySoloNumeros(sc);
+            int opcions = OperacionsBanc.verifySoloNumerosInteger(sc);
 
             switch (opcions) {
                 case 1:

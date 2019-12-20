@@ -19,8 +19,6 @@ import static UF5_EXEPTIONS.ExceptionMessage.ACCOUNT_ZERO_USER;
 public class GestorClients {
 
     Client client ;
-    int cli = 0;
-    List<Client> clientsUnCompteList;
     final String SEP = ",";
 
     public static List<CompteEstalvi> compteList ;
@@ -31,7 +29,7 @@ public class GestorClients {
     }
 
     /**
-     *
+     *          Crea un compte Nou amb client Nou
      * @throws IOException
      */
     public void clientNouCompte() throws IOException {
@@ -66,6 +64,12 @@ public class GestorClients {
 
     }
 
+    /**
+     *      Afegeix un client nou a compte ja existen
+     *
+     * @throws IOException
+     * @throws DNIincorrectoExeption
+     */
     public void clientCompteExisten() throws IOException, DNIincorrectoExeption {
 
         String dni = null;

@@ -48,11 +48,6 @@ public class CompteEstalvi {
      @return quantitat d'usuaris que té el compte
      @throws BankAccountException
      **/
-    public int removeUser(String dni) {
-
-        llista_usuaris.removeIf(u -> dni.equals(u.getDNI()));
-        return llista_usuaris.size();
-    }
 
     public String  introdueixNumeroCompte(Scanner sc) throws AccountIncorrecta, IOException {
         String numeroCompte = "";
@@ -121,7 +116,5 @@ public class CompteEstalvi {
         this.id = id;
     }
 
-    public List<Client> getLlista_usuaris(List<Client> llista_usuaris) {
-        return llista_usuaris;
-    }
+
 }

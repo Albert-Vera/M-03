@@ -113,6 +113,10 @@ public class GestorOperacions {
     public void ferTransferencia(String numeroCompte1, String numeroCompte2, CompteEstalvi compteEstalvi) throws IOException, Ingres_Erroni {
        Double transferencia = 0.0;
         boolean repetir = false;
+        System.out.println("\n Introdueix el número de compte origen de la trasferència\n");
+        numeroCompte1 = introdueixCompte();
+        System.out.println("\n Introdueix el número de compte desti de la trasferència\n");
+        numeroCompte2 = introdueixCompte();
 
         while (!repetir) {
             try {
@@ -151,8 +155,6 @@ public class GestorOperacions {
 
     public void veureSaldo(String numeroCompte, CompteEstalvi compteEstalvi) throws IOException {
 
-
-
         BufferedReader inputStream = new BufferedReader(new FileReader("fitxerComptes.dat"));
         String line;
         while((line = inputStream.readLine()) != null){
@@ -168,6 +170,15 @@ public class GestorOperacions {
 
     }
 
+    /**
+     * Modificar el fitxer on s'emmagatzement totes les dades
+     * Cada ingres, retirade de diners, eliminar client,
+     * en cada moviment es modificar la base de dades del fitxer
+     *
+     * @param dni
+     * @param compteEstalvi
+     * @throws IOException
+     */
     private void modificarBaseDades(String dni , CompteEstalvi compteEstalvi) throws IOException {
         File destino = new File ("fitxerComptes.dat");
         File tmpFile = new File(destino.getAbsolutePath() + "tmp");
