@@ -12,6 +12,6 @@ public class ExceptionMessage {
 
     //OPERATIONS
     public static final String TRANSFER_ERROR = "Error en la transferència";
-
+    public static final String INGRES_ERRONI = "Error al realitzar l'ingrès";
 
 }
