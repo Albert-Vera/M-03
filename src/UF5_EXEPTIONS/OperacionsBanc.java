@@ -97,7 +97,7 @@ public class OperacionsBanc {
         while ( !repetir) {
             try {
                 System.out.print("introdueix la quantitat que vols " + texte + " : ");
-                money = OperacionsBanc.verifySoloNumerosDouble(sc);
+                money = OperacionsBanc.verifySoloNumerosDouble(sc, "introdueix la quantitat que vols " + texte + " : ");
 
                 if (money < 0 ){
                     throw new Ingres_Erroni(INGRES_ERRONI);
@@ -117,7 +117,7 @@ public class OperacionsBanc {
      * @param sc
      * @return
      */
-    public static int verifySoloNumerosInteger(Scanner sc){
+    public static int verifySoloNumerosInteger(Scanner sc, String text){
 
         boolean repetir= false;
         String texto = "";
@@ -129,7 +129,8 @@ public class OperacionsBanc {
                 numero = Integer.parseInt(texto);
                 repetir = true;
             } catch (NumberFormatException e) {
-                System.out.println("Ese valor no es válido");
+                System.out.println("  Valor no vàlid");
+                System.out.println(text);
             }
         }
         return numero;
@@ -141,7 +142,7 @@ public class OperacionsBanc {
      * @param sc
      * @return
      */
-    public static Double verifySoloNumerosDouble(Scanner sc){
+    public static Double verifySoloNumerosDouble(Scanner sc, String text){
 
         boolean repetir= false;
         String texto = "";
@@ -153,7 +154,8 @@ public class OperacionsBanc {
                 numero = Double.parseDouble(texto);
                 repetir = true;
             } catch (NumberFormatException e) {
-                System.out.println("Ese valor no es válido");
+                System.out.println("  Valor no vàlid");
+                System.out.println(text);
             }
         }
         return numero;

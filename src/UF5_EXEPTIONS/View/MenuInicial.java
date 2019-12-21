@@ -21,7 +21,7 @@ public class MenuInicial {
             System.out.println("\n\n\t\t\t 3: Sortir \n");
             System.out.println("\n-------------------------------------");
 
-            int opcions = OperacionsBanc.verifySoloNumerosInteger(sc);
+            int opcions = OperacionsBanc.verifySoloNumerosInteger(sc, " Tria una opció vàlida");
             switch (opcions) {
                 case 1:
                     new MenuGestorClients().menuGestor();

@@ -110,13 +110,21 @@ public class GestorOperacions {
      * @throws IOException
      */
 
-    public void ferTransferencia(String numeroCompte1, String numeroCompte2, CompteEstalvi compteEstalvi) throws IOException, Ingres_Erroni {
+    public void ferTransferencia(CompteEstalvi compteEstalvi) throws IOException, Ingres_Erroni {
        Double transferencia = 0.0;
         boolean repetir = false;
+        String numeroCompte1, numeroCompte2;
         System.out.println("\n Introdueix el número de compte origen de la trasferència\n");
         numeroCompte1 = introdueixCompte();
-        System.out.println("\n Introdueix el número de compte desti de la trasferència\n");
-        numeroCompte2 = introdueixCompte();
+        boolean compteRepe = false;
+
+        do {            // VERIFICA QUE NO POSSIS EL MATEIX NÚMERO DE COMPTE
+            if (!compteRepe) {
+                compteRepe = true;
+                System.out.println("\n Introdueix el número de compte desti de la trasferència\n");
+            }else System.out.println("No siguis cabezón i no posis el mateix número de compte.");
+            numeroCompte2 = introdueixCompte();
+        }while ( numeroCompte1.equalsIgnoreCase(numeroCompte2));
 
         while (!repetir) {
             try {
