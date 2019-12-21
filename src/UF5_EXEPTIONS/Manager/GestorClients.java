@@ -329,8 +329,8 @@ public class GestorClients {
         while((line = inputStream.readLine()) != null){
             String[] values = line.split(SEP);
             ultimID = Integer.valueOf(values[0]);
-            ultimID += 1;
         }
+        ultimID += 1;
         inputStream.close();
         System.out.println(ultimID);
         return ultimID;

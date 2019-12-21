@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class MenuInserirClient {
 
     void inserirClient() throws IOException, DNIincorrectoExeption {
-        boolean noEntrarAqui = false;
+
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("\n-------------------------------------");
